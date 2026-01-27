@@ -13,6 +13,36 @@
 
 #define BLKLIST @[@"Google Chrome Helper", @"SIMBLAgent", @"osascript"]
 
+#if MAC_OS_X_VERSION_MAX_ALLOWED <= MAC_OS_X_VERSION_10_9
+// from https://gist.github.com/jlott1/038127cda6e23eaa0942
+@interface NSString (StringContents)
+- (BOOL)containsString:(NSString*)substring;
+- (BOOL)containsString:(NSString*)substring ignoreCase:(BOOL)ignoreCase;
+- (BOOL)containsFormat:(NSString*)regex;
+@end
+
+@implementation NSString (StringContents)
+- (BOOL)containsString:(NSString*)substring
+{
+    return (substring.length && [self rangeOfString:substring].length);
+}
+
+- (BOOL)containsString:(NSString*)substring ignoreCase:(BOOL)ignoreCase
+{
+    if(ignoreCase)
+        return (substring.length && [self rangeOfString:substring options:NSCaseInsensitiveSearch].length);
+    else
+        return (substring.length && [self rangeOfString:substring].length);
+}
+
+- (BOOL)containsFormat:(NSString*)regex
+{
+    NSPredicate *regextest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
+    return [regextest evaluateWithObject:self];
+}
+@end
+#endif
+
 AppDelegate* this;
 
 @interface AppDelegate ()
@@ -126,7 +156,8 @@ AppDelegate* this;
     SIMBLLogDebug(@"app start notification: %@", runningApp);
     
     // Check to see if there are plugins to load
-    if ([SIMBL shouldInstallPluginsIntoApplication:[NSBundle bundleWithURL:runningApp.bundleURL]] == NO) return;
+    // Check if we have a valid bundleURL before handing it to bundleWithURL: to avoid raising exceptions.
+    if (!runningApp.bundleURL || [SIMBL shouldInstallPluginsIntoApplication:[NSBundle bundleWithURL:runningApp.bundleURL]] == NO) return;
     
     // User Blacklist
     NSString* appIdentifier = runningApp.bundleIdentifier;
@@ -135,12 +166,21 @@ AppDelegate* this;
         SIMBLLogNotice(@"ignoring injection attempt for blacklisted application %@ (%@)", appName, appIdentifier);
         return;
     }
-    
+
+#if MAC_OS_X_VERSION_MAX_ALLOWED > MAC_OS_X_VERSION_10_9
     // Abort you're running something other than macOS 10.X.X
     if ([[NSProcessInfo processInfo] operatingSystemVersion].majorVersion != 10) {
         SIMBLLogNotice(@"something fishy - OS X version %ld", [[NSProcessInfo processInfo] operatingSystemVersion].majorVersion);
         return;
     }
+#else
+    // Abort you're running something other than macOS 10.X.X
+    NSProcessInfo *prInfo = [NSProcessInfo processInfo];
+    if ([prInfo operatingSystem] != NSMACHOperatingSystem || ![[prInfo operatingSystemVersionString] containsString:@"10."]) {
+        SIMBLLogNotice(@"something fishy - OS X (?) version %@", [prInfo operatingSystemVersionString]);
+        return;
+    }
+#endif
     
     // System item Inject
     if ([[[runningApp.executableURL.path pathComponents] firstObject] isEqualToString:@"System"]) {
