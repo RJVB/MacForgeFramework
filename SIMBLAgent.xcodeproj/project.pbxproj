@@ -1,0 +1,314 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		D6956C762F297ACC00799E85 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = D6956C752F297ACC00799E85 /* README.md */; };
+		D6E2EC942F2969C200A6C60D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D6E2EC902F2969C200A6C60D /* AppDelegate.m */; };
+		D6E2EC952F2969C200A6C60D /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D6E2EC912F2969C200A6C60D /* Info.plist */; };
+		D6E2EC962F2969C200A6C60D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D6E2EC922F2969C200A6C60D /* main.m */; };
+		D6E2EC972F2969C200A6C60D /* net.culater.SIMBL.Agent.plist in Resources */ = {isa = PBXBuildFile; fileRef = D6E2EC932F2969C200A6C60D /* net.culater.SIMBL.Agent.plist */; };
+		D6E2EC9B2F29740600A6C60D /* SIMBL.m in Sources */ = {isa = PBXBuildFile; fileRef = D6E2EC9A2F29740600A6C60D /* SIMBL.m */; };
+		D6E2EC9D2F29741500A6C60D /* SIMBLPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = D6E2EC9C2F29741500A6C60D /* SIMBLPlugin.m */; };
+		D6E2EC9F2F29773600A6C60D /* NSAlert_SIMBL.m in Sources */ = {isa = PBXBuildFile; fileRef = D6E2EC9E2F29773600A6C60D /* NSAlert_SIMBL.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		D675522C2F29694E00F65352 /* SIMBLAgent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SIMBLAgent.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D6956C752F297ACC00799E85 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		D6E2EC8F2F2969C200A6C60D /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		D6E2EC902F2969C200A6C60D /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		D6E2EC912F2969C200A6C60D /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D6E2EC922F2969C200A6C60D /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		D6E2EC932F2969C200A6C60D /* net.culater.SIMBL.Agent.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = net.culater.SIMBL.Agent.plist; sourceTree = "<group>"; };
+		D6E2EC982F296D2B00A6C60D /* SIMBL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SIMBL.h; path = SIMBLsrc/SIMBL.h; sourceTree = SOURCE_ROOT; };
+		D6E2EC992F296D2B00A6C60D /* SIMBLPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SIMBLPlugin.h; path = SIMBLsrc/SIMBLPlugin.h; sourceTree = SOURCE_ROOT; };
+		D6E2EC9A2F29740600A6C60D /* SIMBL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SIMBL.m; path = SIMBLsrc/SIMBL.m; sourceTree = SOURCE_ROOT; };
+		D6E2EC9C2F29741500A6C60D /* SIMBLPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SIMBLPlugin.m; path = SIMBLsrc/SIMBLPlugin.m; sourceTree = SOURCE_ROOT; };
+		D6E2EC9E2F29773600A6C60D /* NSAlert_SIMBL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSAlert_SIMBL.m; path = SIMBLsrc/NSAlert_SIMBL.m; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D67552292F29694E00F65352 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D67552232F29694E00F65352 = {
+			isa = PBXGroup;
+			children = (
+				D6956C752F297ACC00799E85 /* README.md */,
+				D675522E2F29694E00F65352 /* SIMBLAgent */,
+				D675522D2F29694E00F65352 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D675522D2F29694E00F65352 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D675522C2F29694E00F65352 /* SIMBLAgent.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D675522E2F29694E00F65352 /* SIMBLAgent */ = {
+			isa = PBXGroup;
+			children = (
+				D6E2EC9E2F29773600A6C60D /* NSAlert_SIMBL.m */,
+				D6E2EC9C2F29741500A6C60D /* SIMBLPlugin.m */,
+				D6E2EC9A2F29740600A6C60D /* SIMBL.m */,
+				D6E2EC982F296D2B00A6C60D /* SIMBL.h */,
+				D6E2EC992F296D2B00A6C60D /* SIMBLPlugin.h */,
+				D6E2EC8F2F2969C200A6C60D /* AppDelegate.h */,
+				D6E2EC902F2969C200A6C60D /* AppDelegate.m */,
+				D6E2EC912F2969C200A6C60D /* Info.plist */,
+				D6E2EC922F2969C200A6C60D /* main.m */,
+				D6E2EC932F2969C200A6C60D /* net.culater.SIMBL.Agent.plist */,
+			);
+			path = SIMBLAgent;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D675522B2F29694E00F65352 /* SIMBLAgent */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D67552492F29694E00F65352 /* Build configuration list for PBXNativeTarget "SIMBLAgent" */;
+			buildPhases = (
+				D67552282F29694E00F65352 /* Sources */,
+				D67552292F29694E00F65352 /* Frameworks */,
+				D675522A2F29694E00F65352 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SIMBLAgent;
+			productName = SIMBLAgent;
+			productReference = D675522C2F29694E00F65352 /* SIMBLAgent.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D67552242F29694E00F65352 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0620;
+				ORGANIZATIONNAME = "Wolfgang Baird";
+				TargetAttributes = {
+					D675522B2F29694E00F65352 = {
+						CreatedOnToolsVersion = 6.2;
+					};
+				};
+			};
+			buildConfigurationList = D67552272F29694E00F65352 /* Build configuration list for PBXProject "SIMBLAgent" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = D67552232F29694E00F65352;
+			productRefGroup = D675522D2F29694E00F65352 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D675522B2F29694E00F65352 /* SIMBLAgent */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D675522A2F29694E00F65352 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D6E2EC972F2969C200A6C60D /* net.culater.SIMBL.Agent.plist in Resources */,
+				D6E2EC952F2969C200A6C60D /* Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D67552282F29694E00F65352 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D6956C762F297ACC00799E85 /* README.md in Sources */,
+				D6E2EC9B2F29740600A6C60D /* SIMBL.m in Sources */,
+				D6E2EC962F2969C200A6C60D /* main.m in Sources */,
+				D6E2EC9F2F29773600A6C60D /* NSAlert_SIMBL.m in Sources */,
+				D6E2EC9D2F29741500A6C60D /* SIMBLPlugin.m in Sources */,
+				D6E2EC942F2969C200A6C60D /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		D67552472F29694E00F65352 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = "";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = org.macports.clang.9.0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_PKGINFO_FILE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					SIMBLsrc,
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx10.9;
+				STRIP_INSTALLED_PRODUCT = NO;
+				USER_HEADER_SEARCH_PATHS = "$(inherited)/../SIMBLsrc";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		D67552482F29694E00F65352 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = "";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_VERSION = org.macports.clang.9.0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_PKGINFO_FILE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					SIMBLsrc,
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_CFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx10.9;
+				STRIP_INSTALLED_PRODUCT = NO;
+				USER_HEADER_SEARCH_PATHS = "$(inherited)/../SIMBLsrc";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		D675524A2F29694E00F65352 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = SIMBLAgent/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				VERSION_INFO_FILE = "$(PRODUCT_NAME)_vers.c";
+			};
+			name = Debug;
+		};
+		D675524B2F29694E00F65352 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = SIMBLAgent/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				VERSION_INFO_FILE = "$(PRODUCT_NAME)_vers.c";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D67552272F29694E00F65352 /* Build configuration list for PBXProject "SIMBLAgent" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D67552472F29694E00F65352 /* Debug */,
+				D67552482F29694E00F65352 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D67552492F29694E00F65352 /* Build configuration list for PBXNativeTarget "SIMBLAgent" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D675524A2F29694E00F65352 /* Debug */,
+				D675524B2F29694E00F65352 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D67552242F29694E00F65352 /* Project object */;
+}
