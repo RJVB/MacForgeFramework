@@ -2,15 +2,11 @@
 
 MacForge Framework is a framework for installing/updating/removing a modern version of SIMBL / MacForge that works on macOS 10.10 and above. This project uses a modified version of SIMBL to load plugins into applications and is designed as a successor to the original SIMBL which no longer works properly due to changes made by Apple.
 
+This branch @github:RJVB/MacForgeFramework only contains a version of the SIMBLAgent that builds and runs on 10.9 and possibly earlier.
+
 # Features
 
-- Install/update/remove SIMBL.osax and SIMBLAgent
-- Check if SIMBL / MacForge needs updating
-
-- Check System Integrity Protection (SIP) status
-- Check Apple Mobile File Integrity (AMFI) status
-
-- Toggle Apple Mobile File Integrity (AMFI)
+- build SIMBLAgent
 
 # License
 
