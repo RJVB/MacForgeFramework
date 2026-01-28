@@ -19,7 +19,7 @@
 
 /* Begin PBXFileReference section */
 		D675522C2F29694E00F65352 /* SIMBLAgent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SIMBLAgent.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		D6956C752F297ACC00799E85 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		D6956C752F297ACC00799E85 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		D6E2EC8F2F2969C200A6C60D /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		D6E2EC902F2969C200A6C60D /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		D6E2EC912F2969C200A6C60D /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -270,6 +270,21 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = SIMBLAgent/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				OTHER_CFLAGS = (
+					"-march=westmere",
+					"-msse4.1",
+					"-msse4.2",
+					"-msse3",
+					"-mssse3",
+					"-msse2",
+					"-msse",
+					"-mmmx",
+					"-mpclmul",
+					"-ftree-vectorize",
+					"-fobjc-arc-exceptions",
+					"-fobjc-arc",
+					"-fobjc-weak",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VERSION_INFO_FILE = "$(PRODUCT_NAME)_vers.c";
 			};
@@ -282,6 +297,21 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = SIMBLAgent/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				OTHER_CFLAGS = (
+					"-march=westmere",
+					"-msse4.1",
+					"-msse4.2",
+					"-msse3",
+					"-mssse3",
+					"-msse2",
+					"-msse",
+					"-mmmx",
+					"-mpclmul",
+					"-ftree-vectorize",
+					"-fobjc-arc-exceptions",
+					"-fobjc-arc",
+					"-fobjc-weak",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VERSION_INFO_FILE = "$(PRODUCT_NAME)_vers.c";
 			};
