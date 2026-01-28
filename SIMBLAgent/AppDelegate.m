@@ -74,8 +74,6 @@ AppDelegate* this;
     this = self;
     NSProcessInfo* procInfo = [NSProcessInfo processInfo];
 
-    NSLog(@"howdy startup...");
-    
     if ([(NSString*)procInfo.arguments.lastObject hasPrefix:@"-psn"]) {
         // if we were started interactively, load in launchd and terminate
         SIMBLLogNotice(@"installing into launchd");
