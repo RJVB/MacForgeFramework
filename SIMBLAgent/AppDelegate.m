@@ -11,7 +11,7 @@
 #import <ScriptingBridge/ScriptingBridge.h>
 #import <Carbon/Carbon.h>
 
-#define BLKLIST @[@"Google Chrome Helper", @"SIMBLAgent", @"osascript"]
+#define BLKLIST @[@"Google Chrome Helper", @"SIMBLAgent", @"osascript", @"org.mozilla.plugincontainer"]
 
 #if MAC_OS_X_VERSION_MAX_ALLOWED <= MAC_OS_X_VERSION_10_9
 // from https://gist.github.com/jlott1/038127cda6e23eaa0942
@@ -107,7 +107,7 @@ AppDelegate* this;
 
 - (void)applescriptInject:(NSRunningApplication*)runningApp {
     if (![runningApp.bundleIdentifier containsString:@"com.Logitech.Control"]) {
-        NSDictionary* errorDict;
+        NSDictionary* errorDict = nil;
         NSString *applescript =  [NSString stringWithFormat:@"\
                                   set doesExist to false\n\
                                   set appname to \"nill\"\n\
@@ -121,7 +121,7 @@ AppDelegate* this;
                                   end try\n\
                                   if doesExist then\n\
                                   with timeout of 2 seconds\n\
-                                  tell application appname to inject SIMBL into Snow Leopard\n\
+                                  tell application appname to inject SIMBL\n\
                                   end timeout\n\
                                   return appname\n\
                                   end if", runningApp.bundleIdentifier];
@@ -132,15 +132,19 @@ AppDelegate* this;
         }
         NSLog(@"%@", runningApp.bundleIdentifier);
         NSAppleScript* scriptObject = [[NSAppleScript alloc] initWithSource:applescript];
-        if ([[[NSWorkspace sharedWorkspace] runningApplications] containsObject:runningApp])
-            [scriptObject executeAndReturnError:&errorDict];
+        if ([[[NSWorkspace sharedWorkspace] runningApplications] containsObject:runningApp]) {
+            if (![scriptObject executeAndReturnError:&errorDict]) {
+                NSLog(@"AppleScript injection failed: %@", [errorDict valueForKey:@"NSAppleScriptErrorMessage"]);
+            }
+        }
     }
 }
 
 - (void)injectSIMBL:(NSRunningApplication*)runningApp {
     // Hardcoded blacklist
     /* Probably a good idea to switch to bundleID instead of localizedName */
-    if ([BLKLIST containsObject:runningApp.localizedName]) return;
+    // RJVB: or just handle both...
+    if ([BLKLIST containsObject:runningApp.localizedName] || [BLKLIST containsObject:runningApp.bundleIdentifier]) return;
     
     // Don't inject if somehow the executable doesn't seem to exist
     if (!runningApp.executableURL.path.length) return;
@@ -152,7 +156,7 @@ AppDelegate* this;
     [defaults synchronize];
     
     NSString* appName = runningApp.localizedName;
-    SIMBLLogInfo(@"%@ started", appName);
+    SIMBLLogInfo(@"%@ (%d) started", appName, runningApp.processIdentifier);
     SIMBLLogDebug(@"app start notification: %@", runningApp);
     
     // Check to see if there are plugins to load
