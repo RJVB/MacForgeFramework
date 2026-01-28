@@ -228,7 +228,7 @@ AppDelegate* this;
 
     if ((int)err != 0) {
         // Try to inject via applescript
-        NSLog(@"Injecting into %@ failed trying applescript...", runningApp.localizedName);
+        NSLog(@"Injecting into %@ failed; trying applescript...", runningApp.localizedName);
         return [self applescriptInject:runningApp];
     }
     return YES;
