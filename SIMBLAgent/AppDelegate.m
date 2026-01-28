@@ -84,26 +84,35 @@ AppDelegate* this;
         /* Start watching for application launches */
         [self watchForApplications];
         /* Load into apps that existed before we started looking launches */
-        [self injectIntoAnchients];
+        [self injectIntoAncients];
     }
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification { }
 
-- (void)injectIntoAnchients {
+- (void)injectIntoAncients {
+    BOOL loginwindowInjected;
     /* Lets only try apps because that seems smart */
-    for (NSRunningApplication *app in [[NSWorkspace sharedWorkspace] runningApplications])
-        if ([app.bundleURL.pathExtension isEqualToString:@"app"])
-            [self injectSIMBL:app];
+    for (NSRunningApplication *app in [[NSWorkspace sharedWorkspace] runningApplications]) {
+        if ([app.bundleURL.pathExtension isEqualToString:@"app"]) {
+            BOOL ok = [self injectSIMBL:app];
+            if ([app.bundleIdentifier isEqualToString:@"com.apple.loginwindow"]) {
+                loginwindowInjected = ok;
+            }
+        }
+    }
 
-    /* Seemed like it wasn't always loading into loginwindow? */
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 2 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-            NSRunningApplication *loginWindow = [[NSRunningApplication runningApplicationsWithBundleIdentifier:@"com.apple.loginwindow"] firstObject];
-            [self injectSIMBL:loginWindow];
-    });
+    if (!loginwindowInjected) {
+        /* Seemed like it wasn't always loading into loginwindow? */
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 2 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+                NSRunningApplication *loginWindow = [[NSRunningApplication runningApplicationsWithBundleIdentifier:@"com.apple.loginwindow"] firstObject];
+                [self injectSIMBL:loginWindow];
+        });
+    }
 }
 
-- (void)applescriptInject:(NSRunningApplication*)runningApp {
+- (BOOL)applescriptInject:(NSRunningApplication*)runningApp {
+    BOOL ret = NO;
     if (![runningApp.bundleIdentifier containsString:@"com.Logitech.Control"]) {
         NSDictionary* errorDict = nil;
         NSString *applescript =  [NSString stringWithFormat:@"\
@@ -135,17 +144,21 @@ AppDelegate* this;
                 NSLog(@"AppleScript injection failed: %@", [errorDict valueForKey:@"NSAppleScriptErrorMessage"]);
             }
         }
+        ret = YES;
     }
+    return ret;
 }
 
-- (void)injectSIMBL:(NSRunningApplication*)runningApp {
+- (BOOL)injectSIMBL:(NSRunningApplication*)runningApp {
     // Hardcoded blacklist
     /* Probably a good idea to switch to bundleID instead of localizedName */
     // RJVB: or just handle both...
-    if ([BLKLIST containsObject:runningApp.localizedName] || [BLKLIST containsObject:runningApp.bundleIdentifier]) return;
+    if ([BLKLIST containsObject:runningApp.localizedName] || [BLKLIST containsObject:runningApp.bundleIdentifier])
+        return NO;
     
     // Don't inject if somehow the executable doesn't seem to exist
-    if (!runningApp.executableURL.path.length) return;
+    if (!runningApp.executableURL.path.length)
+        return NO;
     
     // If you change the log level externally, there is pretty much no way
     // to know when the changed. Just reading from the defaults doesn't validate
@@ -159,36 +172,35 @@ AppDelegate* this;
     
     // Check to see if there are plugins to load
     // Check if we have a valid bundleURL before handing it to bundleWithURL: to avoid raising exceptions.
-    if (!runningApp.bundleURL || [SIMBL shouldInstallPluginsIntoApplication:[NSBundle bundleWithURL:runningApp.bundleURL]] == NO) return;
+    if (!runningApp.bundleURL || [SIMBL shouldInstallPluginsIntoApplication:[NSBundle bundleWithURL:runningApp.bundleURL]] == NO)
+        return NO;
     
     // User Blacklist
     NSString* appIdentifier = runningApp.bundleIdentifier;
     NSArray* blacklistedIdentifiers = [defaults stringArrayForKey:@"SIMBLApplicationIdentifierBlacklist"];
     if (blacklistedIdentifiers != nil && [blacklistedIdentifiers containsObject:appIdentifier]) {
         SIMBLLogNotice(@"ignoring injection attempt for blacklisted application %@ (%@)", appName, appIdentifier);
-        return;
+        return NO;
     }
 
-#if MAC_OS_X_VERSION_MAX_ALLOWED > MAC_OS_X_VERSION_10_9
     // Abort you're running something other than macOS 10.X.X
+#if MAC_OS_X_VERSION_MAX_ALLOWED > MAC_OS_X_VERSION_10_9
     if ([[NSProcessInfo processInfo] operatingSystemVersion].majorVersion != 10) {
         SIMBLLogNotice(@"something fishy - OS X version %ld", [[NSProcessInfo processInfo] operatingSystemVersion].majorVersion);
-        return;
+        return NO;
     }
 #else
-    // Abort you're running something other than macOS 10.X.X
     NSProcessInfo *prInfo = [NSProcessInfo processInfo];
     if ([prInfo operatingSystem] != NSMACHOperatingSystem || ![[prInfo operatingSystemVersionString] containsString:@"10."]) {
         SIMBLLogNotice(@"something fishy - OS X (?) version %@", [prInfo operatingSystemVersionString]);
-        return;
+        return NO;
     }
 #endif
     
     // System item Inject
     if ([[[runningApp.executableURL.path pathComponents] firstObject] isEqualToString:@"System"]) {
         SIMBLLogDebug(@"send system process inject event");
-        [self applescriptInject:runningApp];
-        return;
+        return [self applescriptInject:runningApp];
     }
     
     SIMBLLogDebug(@"send standard process inject event");
@@ -217,8 +229,9 @@ AppDelegate* this;
     if ((int)err != 0) {
         // Try to inject via applescript
         NSLog(@"Injecting into %@ failed trying applescript...", runningApp.localizedName);
-        [self applescriptInject:runningApp];
+        return [self applescriptInject:runningApp];
     }
+    return YES;
 }
 
 - (void)watchForApplications {
