@@ -1,3 +1,7 @@
 .DS_Store
 xcuserdata/
+xcshareddata
+*.xcodeproj/xcuserdata
+*.xcodeproj/project.xcworkspace/xcuserdata
+*.xcodeproj/*.mode1v3
 build
