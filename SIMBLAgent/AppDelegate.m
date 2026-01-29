@@ -137,7 +137,6 @@ AppDelegate* this;
             tell application \"com.apple.appkit.xpc.openAndSavePanelService\" to inject SIMBL into Snow Leopard\n\
             end timeout";
         }
-        NSLog(@"%@", runningApp.bundleIdentifier);
         NSAppleScript* scriptObject = [[NSAppleScript alloc] initWithSource:applescript];
         if ([[[NSWorkspace sharedWorkspace] runningApplications] containsObject:runningApp]) {
             if (![scriptObject executeAndReturnError:&errorDict]) {
@@ -206,29 +205,37 @@ AppDelegate* this;
     SIMBLLogDebug(@"send standard process inject event");
     
     int pid = [runningApp processIdentifier];
-    NSAppleEventDescriptor *app = [NSAppleEventDescriptor descriptorWithDescriptorType:typeKernelProcessID bytes:&pid length:sizeof(pid)];
-    NSAppleEventDescriptor *ae;
     OSStatus err;
+    NSAppleEventDescriptor *app = [NSAppleEventDescriptor descriptorWithDescriptorType:typeKernelProcessID bytes:&pid length:sizeof(pid)];
+    if (!app) {
+        NSLog(@"failed to obtain AppleEvent descriptor for pid=%d", pid);
+        err = -1;
+    } else {
+        NSAppleEventDescriptor *ae;
 
-    // Initialize applescript
-    ae = [NSAppleEventDescriptor appleEventWithEventClass:kASAppleScriptSuite
-                                                  eventID:kGetAEUT
-                                         targetDescriptor:app
-                                                 returnID:kAutoGenerateReturnID
-                                            transactionID:kAnyTransactionID];
-    err = AESendMessage([ae aeDesc], NULL, kAENoReply | kAENeverInteract, kAEDontRecord); /* kAEWaitReply ? */
-
-    // Send load applescript
-    ae = [NSAppleEventDescriptor appleEventWithEventClass:'SIMe'
-                                                  eventID:'load'
-                                         targetDescriptor:app
-                                                 returnID:kAutoGenerateReturnID
-                                            transactionID:kAnyTransactionID];
-    err = AESendMessage([ae aeDesc], NULL, kAENoReply | kAENeverInteract, kAEDontRecord);
+        // Initialise applescript
+        ae = [NSAppleEventDescriptor appleEventWithEventClass:kASAppleScriptSuite
+                                                      eventID:kGetAEUT
+                                             targetDescriptor:app
+                                                     returnID:kAutoGenerateReturnID
+                                                transactionID:kAnyTransactionID];
+        err = AESendMessage([ae aeDesc], NULL, kAENoReply | kAENeverInteract, kAEDontRecord); /* kAEWaitReply ? */
+        if (err) {
+            NSLog(@"failed to initialise AppleScript");
+        } else {
+            // Send load applescript
+            ae = [NSAppleEventDescriptor appleEventWithEventClass:'SIMe'
+                                                          eventID:'load'
+                                                 targetDescriptor:app
+                                                         returnID:kAutoGenerateReturnID
+                                                    transactionID:kAnyTransactionID];
+            err = AESendMessage([ae aeDesc], NULL, kAENoReply | kAENeverInteract, kAEDontRecord);
+        }
+    }
 
     if ((int)err != 0) {
         // Try to inject via applescript
-        NSLog(@"Injecting into %@ failed; trying applescript...", runningApp.localizedName);
+        NSLog(@"Injecting into %@ failed (error %d); trying AppleScript...", runningApp.localizedName, err);
         return [self applescriptInject:runningApp];
     }
     return YES;
