@@ -166,7 +166,6 @@ AppDelegate* this;
     [defaults synchronize];
     
     NSString* appName = runningApp.localizedName;
-    SIMBLLogInfo(@"%@ (%d) started", appName, runningApp.processIdentifier);
     SIMBLLogDebug(@"app start notification: %@", runningApp);
     
     // Check to see if there are plugins to load
@@ -174,6 +173,8 @@ AppDelegate* this;
     if (!runningApp.bundleURL || [SIMBL shouldInstallPluginsIntoApplication:[NSBundle bundleWithURL:runningApp.bundleURL]] == NO)
         return NO;
     
+    SIMBLLogInfo(@"%@ (%d) started", appName, runningApp.processIdentifier);
+
     // User Blacklist
     NSString* appIdentifier = runningApp.bundleIdentifier;
     NSArray* blacklistedIdentifiers = [defaults stringArrayForKey:@"SIMBLApplicationIdentifierBlacklist"];
